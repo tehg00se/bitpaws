@@ -42,8 +42,6 @@ class CreateProfiles extends Command
      */
     public function handle()
     {
-        $users = [];
-
         $faker = Faker::create();
 
         $ids = DB::select('select id from users ORDER BY id DESC LIMIT 0,10');
@@ -60,11 +58,9 @@ class CreateProfiles extends Command
             $profile->interests = $faker->sentence;
             $profile->hobbies = $faker->sentence;
 
-            array_push($users, $user->profile()->save($profile));
+            $user->profile()->save($profile);
 
         }
-
-        Log::info('The users returned are' . json_encode(['users' => $users]));
 
     }
 }

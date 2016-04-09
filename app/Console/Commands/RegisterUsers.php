@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use Event;
+use App\Events\UserWasRegistered;
 use Illuminate\Console\Command;
 use Faker\Factory as Faker;
 use App\Models\User;
@@ -29,8 +31,6 @@ class RegisterUsers extends Command
     public function handle()
     {
 
-        $users = [];
-
         $faker = Faker::create();
 
         foreach (range(1,10) as $index) {
@@ -41,14 +41,10 @@ class RegisterUsers extends Command
             $user->email = $faker->email;
             $user->password = bcrypt('secret');
 
-            $id = $user->save();
+            $user->save();
 
-            array_push($users, $id);
+            Event::fire(new UserWasRegistered($user));
+
         }
-
-        Log::info('Created users.' . json_encode(['users' => $users]));
-
-        return true;
-
     }
 }

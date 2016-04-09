@@ -2,6 +2,15 @@
 
 namespace App\Console\Commands;
 
+use App\Models\User;
+use App\Models\Animals\Pet;
+use App\Models\Animals\Breed;
+use App\Models\Animals\Species;
+use DB;
+use Log;
+
+use Faker\Factory as Faker;
+
 use Illuminate\Console\Command;
 
 class CreatePets extends Command
@@ -11,7 +20,7 @@ class CreatePets extends Command
      *
      * @var string
      */
-    protected $signature = 'create.pets';
+    protected $signature = 'createPets';
 
     /**
      * The console command description.
@@ -37,6 +46,38 @@ class CreatePets extends Command
      */
     public function handle()
     {
-        //
+        $pets = [];
+
+        $faker = Faker::create();
+
+        $ids = DB::select('select id from users ORDER BY id DESC LIMIT 0,10');
+
+        foreach($ids as $k => $v) {
+
+            $user = new User;
+            $user = $user->find($v->id);
+
+            $pet = new Pet;
+
+            $pet->name = $faker->firstName;
+            $pet->description = $faker->paragraph;
+            $pet->dob = $faker->date('Y-m-d');
+            $pet->story = $faker->sentence;
+
+            $species = rand(1,2);
+
+            $pet->species_id = $species;
+
+            $total_mix = rand(1,4);
+
+            $breeds = DB::select("select * from breeds WHERE species_id = '$pet->species_id' ");
+
+            $pet_breeds = array_rand($breeds, $total_mix);
+
+            $pet = $user->pets()->save($pet);
+            $pet->breeds()->attach($pet_breeds);
+
+        }
+
     }
 }
