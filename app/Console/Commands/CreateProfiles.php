@@ -2,10 +2,11 @@
 
 namespace App\Console\Commands;
 
+use Event;
+use App\Events\UserProfileWasCreated;
 use DB;
 use App\Models\User;
 use App\Models\UserProfile;
-use Log;
 use Faker\Factory as Faker;
 use Illuminate\Console\Command;
 
@@ -59,6 +60,8 @@ class CreateProfiles extends Command
             $profile->hobbies = $faker->sentence;
 
             $user->profile()->save($profile);
+
+            Event::fire(new UserProfileWasCreated($profile));
 
         }
 

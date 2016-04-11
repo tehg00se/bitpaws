@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use Log;
-use App\Events\UserWasRegistered;
+use App\Events\UserProfileWasCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegistrationEmail
+class UserProfileCreation
 {
     /**
      * Create the event listener.
@@ -25,10 +25,10 @@ class UserRegistrationEmail
      * @param  UserWasRegistered  $event
      * @return void
      */
-    public function handle(UserWasRegistered $event)
+    public function handle(UserProfileWasCreated $event)
     {
 
-        Log::info('New User Registration : ' . json_encode(['user' => $event]));
+        Log::info('New User Profile Created : ' . json_encode(['user' => $event]));
 
     }
 }

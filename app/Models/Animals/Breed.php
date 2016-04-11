@@ -15,7 +15,7 @@ class Breed extends Model
     public function pets()
     {
 
-        return $this->belongsToMany('App\Models\Animals\Pet');
+        return $this->belongsToMany('App\Models\Animals\Pet')->withTimestamps();
 
     }
 }

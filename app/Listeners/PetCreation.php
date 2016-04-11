@@ -3,11 +3,12 @@
 namespace App\Listeners;
 
 use Log;
-use App\Events\UserWasRegistered;
+use App\Events\PetWasCreated;
+use App\Events\UserProfileWasCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegistrationEmail
+class PetCreation
 {
     /**
      * Create the event listener.
@@ -25,10 +26,10 @@ class UserRegistrationEmail
      * @param  UserWasRegistered  $event
      * @return void
      */
-    public function handle(UserWasRegistered $event)
+    public function handle(PetWasCreated $event)
     {
 
-        Log::info('New User Registration : ' . json_encode(['user' => $event]));
+        Log::info('User added a pet : ' . json_encode(['user' => $event]));
 
     }
 }

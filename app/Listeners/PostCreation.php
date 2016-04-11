@@ -3,11 +3,11 @@
 namespace App\Listeners;
 
 use Log;
-use App\Events\UserWasRegistered;
+use App\Events\PostWasMade;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class UserRegistrationEmail
+class PostCreation
 {
     /**
      * Create the event listener.
@@ -25,10 +25,10 @@ class UserRegistrationEmail
      * @param  UserWasRegistered  $event
      * @return void
      */
-    public function handle(UserWasRegistered $event)
+    public function handle(PostWasMade $post)
     {
 
-        Log::info('New User Registration : ' . json_encode(['user' => $event]));
+        Log::info('User added a post : ' . json_encode(['post' => $post]));
 
     }
 }

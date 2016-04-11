@@ -2,10 +2,13 @@
 
 namespace App\Models\Animals;
 
+use App\Traits\PhotoableTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Pet extends Model
 {
+
+    use PhotoableTrait;
 
     protected $table = 'pets';
 
@@ -43,7 +46,7 @@ class Pet extends Model
     public function breeds()
     {
 
-        return $this->belongsToMany('App\Models\Animals\Breed');
+        return $this->belongsToMany('App\Models\Animals\Breed')->withTimestamps();
 
     }
 
@@ -53,7 +56,17 @@ class Pet extends Model
     public function post()
     {
 
-        return $this->belongsToMany('App\Models\Posts\Post');
+        return $this->hasOne('App\Models\Posts\Post');
+
+    }
+
+    /**
+     *
+     */
+    public function scopeNoPost($query)
+    {
+
+        return $query->whereDoesntHave('post');
 
     }
 

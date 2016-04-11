@@ -7,9 +7,13 @@
 trait PhotoableTrait {
 
 
-    public function store()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphMany
+     */
+    public function photos()
     {
 
+        return $this->morphMany('App\Models\Photos\Photo', 'imageable');
 
     }
 

@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         // Commands\Inspire::class,
         Commands\RegisterUsers::class,
         Commands\CreateProfiles::class,
-        Commands\CreatePets::class
+        Commands\CreatePets::class,
+        Commands\CreatePosts::class
     ];
 
     /**
@@ -28,11 +29,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
 
-        $schedule->command('registerUsers')->everyThirtyMinutes();
-
-        $schedule->command('createProfiles')->everyThirtyMinutes();
-
-        $schedule->command('createPets')->everyThirtyMinutes();
+        $schedule->command('registerUsers')->hourly();
+        $schedule->command('createProfiles')->hourly();
+        $schedule->command('createPets')->hourly();
+        $schedule->command('createPosts')->hourly();
 
     }
 }

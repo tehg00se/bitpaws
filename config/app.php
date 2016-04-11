@@ -182,6 +182,7 @@ return [
     'aliases' => [
 
         'Antimatter' => Illuminate\Support\Facades\App::class,
+        'Authorizer' => \LucaDegasperi\OAuth2Server\Facades\Authorizer::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,

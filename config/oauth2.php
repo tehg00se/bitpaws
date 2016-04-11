@@ -28,7 +28,11 @@ return [
     */
 
     'grant_types' => [
-
+            'password' => [
+                         'class' => 'League\OAuth2\Server\Grant\PasswordGrant',
+                         'access_token_ttl' => 604800,
+                         'callback' => '\App\Services\UserApiVerification@verify'
+                        ]
     ],
 
     /*
