@@ -2,6 +2,7 @@
 
 namespace App\Models\Posts;
 
+use DB;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -30,4 +31,5 @@ class Coordinate extends Model
         return $this->morphTo();
 
     }
+
 }

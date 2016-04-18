@@ -45,7 +45,6 @@ class GoogleMapController extends Controller
     {
 
         $latlng = $request['latlng'];
-
         //dd($request['latitude'] . " IS THE LATITUDE " .  $request['longitude'] . " IS THE LONG");
 
         $response = \GoogleMaps::load('geocoding')
@@ -56,7 +55,7 @@ class GoogleMapController extends Controller
                     ->get('results');
 
         return response()
-                    ->json(['location' => $response]);
+                    ->json(['location' => $response, 'latlng' => $latlng]);
 
     }
 

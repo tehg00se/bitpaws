@@ -11,7 +11,7 @@ class PostsRepository extends BaseRepository {
      */
     function model()
     {
-        return 'App\Models\Post';
+        return 'App\Models\Posts\Post';
     }
 
 }

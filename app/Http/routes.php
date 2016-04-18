@@ -44,6 +44,11 @@ Route::group(['middleware' => 'mobile', 'namespace' => 'BitpawsApi', 'prefix' =>
 
     Route::resource('posts', 'PostsController');
 
+    Route::post('post/geocode', [
+                                    'as' => 'post.geocode',
+                                    'uses' => 'PostsController@geocode'
+    ]);
+
 });
 
 /**
@@ -62,9 +67,9 @@ Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 Route::group(['namespace' => 'ApiServices', 'prefix' => 'services'], function()
 {
 
-    Route::post('user/location', [
-                                    'as' => 'user.location',
+    Route::post('geocode', [
+                                    'as' => 'geocode.location',
                                     'uses' => 'GoogleMapController@retrieveMapLocation'
-                                 ]);
+     ]);
 
 });

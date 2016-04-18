@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "rap2hpoutre/laravel-log-viewer": "^0.6.0",
-        "alexpechkarev/google-maps": "1.0.4"
+        "alexpechkarev/google-maps": "1.0.4",
+        "predis/predis": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

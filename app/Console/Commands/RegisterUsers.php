@@ -37,7 +37,6 @@ class RegisterUsers extends Command
 
             $user = new User;
 
-            $user->username = $faker->username;
             $user->email = $faker->email;
             $user->password = bcrypt('secret');
 

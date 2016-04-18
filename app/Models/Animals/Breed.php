@@ -18,4 +18,14 @@ class Breed extends Model
         return $this->belongsToMany('App\Models\Animals\Pet')->withTimestamps();
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function species()
+    {
+
+        return $this->belongsTo('App\Models\Animals\Species');
+
+    }
 }

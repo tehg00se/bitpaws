@@ -18,7 +18,7 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param App $app
      * @throws \Bosnadev\Repositories\Exceptions\RepositoryException
      */
-    public function __construct(Post $model) {
+    public function __construct($model) {
          $this->model = $model;
     }
 
@@ -33,8 +33,9 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function all($columns = array('*')) {
-        return $this->model->get($columns);
+    public function all($relations = [], $columns = array('*'))
+    {
+        return $this->model->with($relations)->get($columns);
     }
 
     /**
@@ -42,7 +43,8 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function paginate($perPage = 15, $columns = array('*')) {
+    public function paginate($perPage = 15, $columns = array('*'))
+    {
         return $this->model->paginate($perPage, $columns);
     }
 
@@ -50,7 +52,8 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param array $data
      * @return mixed
      */
-    public function create(array $data) {
+    public function create(array $data)
+    {
         return $this->model->create($data);
     }
 
@@ -60,7 +63,8 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param string $attribute
      * @return mixed
      */
-    public function update(array $data, $id, $attribute="id") {
+    public function update(array $data, $id, $attribute="id")
+    {
         return $this->model->where($attribute, '=', $id)->update($data);
     }
 
@@ -68,7 +72,8 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param $id
      * @return mixed
      */
-    public function delete($id) {
+    public function delete($id)
+    {
         return $this->model->destroy($id);
     }
 
@@ -77,8 +82,9 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function find($id, $columns = array('*')) {
-        return $this->model->find($id, $columns);
+    public function find($relations = [], $id, $columns = array('*'))
+    {
+        return $this->model->with($relations)->findorFail($id, $columns);
     }
 
     /**
@@ -87,8 +93,19 @@ abstract class BaseRepository implements RepositoryInterface {
      * @param array $columns
      * @return mixed
      */
-    public function findBy($attribute, $value, $columns = array('*')) {
+    public function findBy($attribute, $value, $columns = array('*'))
+    {
         return $this->model->where($attribute, '=', $value)->first($columns);
+    }
+
+    /**
+     * @param array $relations
+     * @param array $columns
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function load($relations = [], $columns = ['*'])
+    {
+        return $this->model->with($relations)->get($columns);
     }
 
 }
